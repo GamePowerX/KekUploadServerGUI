@@ -32,9 +32,14 @@ For KekUploadServerGUI, you need to add the following assemblies:
 - `System.Drawing.Common.dll`
 - `System.IO.Pipelines.dll`
 - `Tmds.DBus.Protocol.dll`
+
 And also get the native libraries for your platform from the runtimes folder in the plugin's build output.
 ### 3. Start the server
 Start the server and you should see the GUI window pop up.
+
+## Screenshot
+![image](https://github.com/GamePowerX/KekUploadServerGUI/assets/68032198/a13c5697-90c5-4697-87b1-61ea1f69b847)
+
 
 ## Contributing
 You can contribute to this project by creating a pull request or by creating an issue.
