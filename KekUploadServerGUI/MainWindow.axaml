@@ -1,0 +1,40 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="KekUploadServerGUI.MainWindow"
+        Title="KekUploadServerGUI">
+    <Window.Styles>
+        <Style Selector="Button">
+            <Setter Property="Margin" Value="10" />
+        </Style>
+        <Style Selector="WrapPanel">
+            <Setter Property="Margin" Value="10" />
+        </Style>
+        <Style Selector="TextBox">
+            <Setter Property="Margin" Value="10" />
+        </Style>
+    </Window.Styles>
+    <WrapPanel>
+        <StackPanel Name="MenuWrapPanel">
+            <TextBlock Name="TitleTextBlock" Text="Welcome to the KekUploadServerGUI" Margin="0,0,0,0" />
+            <Button Name="ShowSettingsButton" Content="Settings" Click="ShowSettingsButton_Click" />
+            <Button Name="ShowLogsButton" Content="Logs" Click="ShowLogsButton_Click" />
+            <Button Name="ShowUploadsButton" Content="Uploads" Click="ShowUploadsButton_Click" />
+            <Button Name="StopServerButton" Content="Stop Server" Click="StopServerButton_Click" />
+        </StackPanel>
+
+        <WrapPanel Name="SettingsWrapPanel" IsVisible="False">
+            <TextBox Name="PortTextBox" Text="Port" Margin="0,0,0,0" />
+            <TextBox Name="UploadsPathTextBox" Text="UploadsPath" Margin="0,20,0,0" />
+            <Button Name="SaveSettingsButton" Content="Save" Click="SaveSettingsButton_Click" />
+        </WrapPanel>
+        <WrapPanel Name="LogsWrapPanel" IsVisible="False">
+            <TextBox Name="LogsTextBox" Text="Logs" Margin="0,0,0,0" />
+        </WrapPanel>
+        <WrapPanel Name="UploadsWrapPanel" IsVisible="False">
+            <TextBox Name="UploadsTextBox" Text="Uploads" Margin="0,0,0,0" />
+        </WrapPanel>
+    </WrapPanel>
+</Window>
