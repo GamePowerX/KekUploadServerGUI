@@ -47,20 +47,6 @@ public class Main : IPlugin
         _logger.LogInformation("KekUploadServerGUI unloaded!");
     }
 
-    public async Task Reload()
-    {
-        await Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(() =>
-        {
-            Lifetime.Shutdown();
-        });
-        await Task.Delay(1000);
-        _windowThread = new Thread(() =>
-        {
-            Program.Main(Array.Empty<string>());
-        });
-        _windowThread.Start();
-    }
-
     public PluginInfo Info => new()
     {
         Name = "KekUploadServerGUI",
@@ -75,10 +61,5 @@ public class Main : IPlugin
     public void Shutdown()
     {
         Server.Shutdown(this, "User requested shutdown from GUI", TimeSpan.FromSeconds(5));
-    }
-    
-    public void ServerReload()
-    {
-        Server.Reload(this, "User requested reload from GUI", TimeSpan.FromSeconds(5));
     }
 }
