@@ -10,13 +10,13 @@
 
 
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="11.0.0" />
-        <PackageReference Include="Avalonia.Desktop" Version="11.0.0" />
-        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.0" />
-        <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.0" />
+        <PackageReference Include="Avalonia" Version="11.0.2"/>
+        <PackageReference Include="Avalonia.Desktop" Version="11.0.2"/>
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.2"/>
+        <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.2"/>
         <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
-        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.0" />
-        <PackageReference Include="GamePowerX.KekUploadServerApi" Version="1.0.0-alpha2" />
-        <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.0"/>
+        <PackageReference Include="GamePowerX.KekUploadServerApi" Version="1.0.0-alpha3"/>
+        <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0"/>
     </ItemGroup>
 </Project>

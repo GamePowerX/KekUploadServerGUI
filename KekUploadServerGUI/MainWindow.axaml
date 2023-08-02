@@ -10,31 +10,118 @@
             <Setter Property="Margin" Value="10" />
         </Style>
         <Style Selector="WrapPanel">
-            <Setter Property="Margin" Value="10" />
+            <Setter Property="Margin" Value="2" />
         </Style>
         <Style Selector="TextBox">
+            <Setter Property="Margin" Value="1" />
+        </Style>
+        <Style Selector="TextBlock#TitleTextBlock">
+            <Setter Property="FontSize" Value="20" />
             <Setter Property="Margin" Value="10" />
+        </Style>
+        <Style Selector="TextBox#LogsTextBox">
+            <Setter Property="Width" Value="500" />
+            <Setter Property="Height" Value="500" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+        <Style Selector="TextBlock#FileLoggingPluginNotice">
+            <Setter Property="Foreground" Value="Red" />
+        </Style>
+        <Style Selector="TextBlock.Title">
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="Margin" Value="5" />
         </Style>
     </Window.Styles>
     <WrapPanel>
-        <StackPanel Name="MenuWrapPanel">
-            <TextBlock Name="TitleTextBlock" Text="Welcome to the KekUploadServerGUI" Margin="0,0,0,0" />
+        <StackPanel Name="MenuPanel">
+            <TextBlock Name="TitleTextBlock" Text="Welcome to the KekUploadServerGUI" />
             <Button Name="ShowSettingsButton" Content="Settings" Click="ShowSettingsButton_Click" />
             <Button Name="ShowLogsButton" Content="Logs" Click="ShowLogsButton_Click" />
             <Button Name="ShowUploadsButton" Content="Uploads" Click="ShowUploadsButton_Click" />
             <Button Name="StopServerButton" Content="Stop Server" Click="StopServerButton_Click" />
         </StackPanel>
-
-        <WrapPanel Name="SettingsWrapPanel" IsVisible="False">
-            <TextBox Name="PortTextBox" Text="Port" Margin="0,0,0,0" />
-            <TextBox Name="UploadsPathTextBox" Text="UploadsPath" Margin="0,20,0,0" />
+        <StackPanel Name="SettingsPanel" IsVisible="False">
+            <TextBlock Name="SettingsTextBlock" Classes="Title" Text="Settings" />
+            <Border>
+                <StackPanel>
+                    <WrapPanel>
+                        <TextBlock Name="UrlTextBlock" Text="Url" VerticalAlignment="Center" />
+                        <TextBox Name="UrlTextBox" Text="http://0.0.0.0:5254" />
+                    </WrapPanel>
+                    <WrapPanel>
+                        <TextBlock Name="DefaultLogLevelTextBlock" Text="Default Log Level" VerticalAlignment="Center" />
+                        <TextBox Name="DefaultLogLevelTextBox" Text="Information" />
+                    </WrapPanel>
+                    <WrapPanel>
+                        <TextBlock Name="AspNetCoreLogLevelTextBlock" Text="ASP.NET Core Log Level"
+                                   VerticalAlignment="Center" />
+                        <TextBox Name="AspNetCoreLogLevelTextBox" Text="Warning" />
+                    </WrapPanel>
+                    <WrapPanel>
+                        <TextBlock Name="AllowedHostsTextBlock" Text="Allowed Hosts" VerticalAlignment="Center" />
+                        <TextBox Name="AllowedHostsTextBox" Text="*" />
+                    </WrapPanel>
+                    <WrapPanel>
+                        <TextBlock Name="DatabaseConnectionStringTextBlock" Text="Database Connection String"
+                                   VerticalAlignment="Center" />
+                        <TextBox Name="DatabaseConnectionStringTextBox"
+                                 Text="Server=localhost;Database=upload;Port=5432;Username=postgres;Password=password" />
+                    </WrapPanel>
+                    <WrapPanel>
+                        <TextBlock Name="MaxExtensionLengthTextBlock" Text="Max Extension Length"
+                                   VerticalAlignment="Center" />
+                        <TextBox Name="MaxExtensionLengthTextBox" Text="10" />
+                    </WrapPanel>
+                    <WrapPanel>
+                        <TextBlock Name="IdLengthTextBlock" Text="Id Length" VerticalAlignment="Center" />
+                        <TextBox Name="IdLengthTextBox" Text="12" />
+                    </WrapPanel>
+                    <WrapPanel>
+                        <TextBlock Name="BaseUrlTextBlock" Text="Base Url" VerticalAlignment="Center" />
+                        <TextBox Name="BaseUrlTextBox" Text="http://localhost:5254" />
+                    </WrapPanel>
+                    <WrapPanel>
+                        <TextBlock Name="EmbedDescriptionTextBlock" Text="Embed Description" VerticalAlignment="Center" />
+                        <TextBox Name="EmbedDescriptionTextBox" Text="File Uploaded to KekUploadServer" />
+                    </WrapPanel>
+                    <WrapPanel>
+                        <TextBlock Name="EmbedColorTextBlock" Text="Embed Color" VerticalAlignment="Center" />
+                        <TextBox Name="EmbedColorTextBox" Text="#2BFF00" />
+                    </WrapPanel>
+                    <WrapPanel>
+                        <TextBlock Name="WebRootPathTextBlock" Text="Web Root Path" VerticalAlignment="Center" />
+                        <TextBox Name="WebRootPathTextBox" Text="web" />
+                    </WrapPanel>
+                    <WrapPanel>
+                        <TextBlock Name="ThumbnailDirectoryTextBlock" Text="Thumbnail Directory"
+                                   VerticalAlignment="Center" />
+                        <TextBox Name="ThumbnailDirectoryTextBox" Text="thumbs" />
+                    </WrapPanel>
+                    <WrapPanel>
+                        <TextBlock Name="PluginDirectoryTextBlock" Text="Plugin Directory" VerticalAlignment="Center" />
+                        <TextBox Name="PluginDirectoryTextBox" Text="plugins" />
+                    </WrapPanel>
+                    <TextBlock Name="FileLoggingPluginSettingsTextBlock" Classes="Title"
+                               Text="File Logging Plugin Settings" />
+                    <TextBlock Name="FileLoggingPluginNotice"
+                               Text="Notice: For these settings, the file logging plugin must be present." />
+                    <WrapPanel>
+                        <TextBlock Name="LogPathTextBlock" Text="Log Path" VerticalAlignment="Center" />
+                        <TextBox Name="LogPathTextBox" Text="logs" IsEnabled="False" />
+                    </WrapPanel>
+                </StackPanel>
+            </Border>
             <Button Name="SaveSettingsButton" Content="Save" Click="SaveSettingsButton_Click" />
-        </WrapPanel>
-        <WrapPanel Name="LogsWrapPanel" IsVisible="False">
-            <TextBox Name="LogsTextBox" Text="Logs" Margin="0,0,0,0" />
-        </WrapPanel>
-        <WrapPanel Name="UploadsWrapPanel" IsVisible="False">
+            <Button Name="BackToMenuFromSettingsButton" Content="Back" Click="BackToMenuButton_Click" />
+        </StackPanel>
+        <StackPanel Name="LogsPanel" IsVisible="False">
+            <TextBlock Name="LogsTextBlock" Text="Logs" Margin="0,0,0,0" />
+            <TextBox Name="LogsTextBox" Text="Logs" Margin="0,0,0,0" IsReadOnly="True" />
+            <Button Name="BackToMenuFromLogsButton" Content="Back" Click="BackToMenuButton_Click" />
+        </StackPanel>
+        <WrapPanel Name="UploadsPanel" IsVisible="False">
             <TextBox Name="UploadsTextBox" Text="Uploads" Margin="0,0,0,0" />
+            <Button Name="BackToMenuFromUploadsButton" Content="Back" Click="BackToMenuButton_Click" />
         </WrapPanel>
     </WrapPanel>
 </Window>
