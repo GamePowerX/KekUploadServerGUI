@@ -4,7 +4,7 @@ using Avalonia.Markup.Xaml;
 
 namespace KekUploadServerGUI;
 
-public partial class App : Application
+public class App : Application
 {
     public override void Initialize()
     {
@@ -15,10 +15,16 @@ public partial class App : Application
     {
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            var mainWindow = new MainWindow();
-            desktop.MainWindow = mainWindow; 
+            var dataContext = new MainWindowViewModel();
+            var mainWindow = new MainWindow
+            {
+                DataContext = dataContext
+            };
+            desktop.MainWindow = mainWindow;
             Main.Window = mainWindow;
+            Main.DataContext = dataContext;
             Main.Lifetime = desktop;
+            Main.Instance.InvokeWindowInitialized(this);
         }
 
         base.OnFrameworkInitializationCompleted();

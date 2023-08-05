@@ -10,8 +10,8 @@ namespace KekUploadServerGUI;
 
 public class Main : IPlugin
 {
-    public static MainWindow Window = null!;
-    public static IClassicDesktopStyleApplicationLifetime Lifetime = null!;
+    private App? _app;
+
     private ILogger<Main> _logger = null!;
     private Thread _windowThread = null!;
 
@@ -19,6 +19,10 @@ public class Main : IPlugin
     {
         Instance = this;
     }
+
+    public static MainWindow Window { get; set; } = null!;
+    public static MainWindowViewModel DataContext { get; set; } = null!;
+    public static IClassicDesktopStyleApplicationLifetime Lifetime { get; set; } = null!;
 
     public IKekUploadServer Server { get; private set; } = null!;
     public IPlugin? FileLogging { get; private set; }
@@ -30,6 +34,10 @@ public class Main : IPlugin
         _logger = Server.GetPluginLogger<Main>();
         _logger.LogInformation("KekUploadServerGUI loaded!");
         _windowThread = new Thread(() => { Program.MainPlugin(Array.Empty<string>()); });
+        Server.UploadStreamFinalized += (sender, args) =>
+        {
+            Dispatcher.UIThread.InvokeAsync(() => { DataContext.Uploads.Add(args.UploadedItem); });
+        };
         FileLogging = Server.GetPlugin("FileLogging");
         return Task.CompletedTask;
     }
@@ -59,5 +67,17 @@ public class Main : IPlugin
     public void Shutdown()
     {
         Server.Shutdown(this, "User requested shutdown from GUI", TimeSpan.FromSeconds(5));
+    }
+
+    public void InvokeWindowInitialized(App app)
+    {
+        _app = app;
+        new Thread(() =>
+        {
+            var task = Server.GetUploads();
+            task.Wait();
+            // update window
+            Dispatcher.UIThread.InvokeAsync(() => { DataContext.Uploads.AddRange(task.Result); });
+        }).Start();
     }
 }

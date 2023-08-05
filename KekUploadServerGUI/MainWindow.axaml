@@ -2,9 +2,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        xmlns:kekUploadServerGui="clr-namespace:KekUploadServerGUI"
+        xmlns:uploads="clr-namespace:KekUploadServerApi.Uploads;assembly=KekUploadServerApi"
+        mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="450"
         x:Class="KekUploadServerGUI.MainWindow"
         Title="KekUploadServerGUI">
+    <Design.DataContext>
+        <kekUploadServerGui:MainWindowViewModel />
+    </Design.DataContext>
     <Window.Styles>
         <Style Selector="Button">
             <Setter Property="Margin" Value="10" />
@@ -204,10 +209,17 @@
                 <Button Name="ClearLogsButton" Content="Clear" Click="ClearLogsButton_Click" />
                 <Button Name="BackToMenuFromLogsButton" Content="Back" Click="BackToMenuButton_Click" />
             </StackPanel>
-            <WrapPanel Name="UploadsPanel" IsVisible="False">
-                <TextBox Name="UploadsTextBox" Text="Uploads" Margin="0,0,0,0" />
+            <StackPanel Name="UploadsPanel" IsVisible="False">
+                <TextBlock Name="UploadsTextBlock" Text="Uploads" Classes="Title" />
+                <!-- Table showing all uploads -->
+                <DataGrid Name="UploadsDataGrid" ItemsSource="{Binding Uploads}"
+                          x:DataType="kekUploadServerGui:MainWindowViewModel" AutoGenerateColumns="True">
+                    <DataGrid.DataTemplates>
+                        <DataTemplate DataType="uploads:IUploadedItem" />
+                    </DataGrid.DataTemplates>
+                </DataGrid>
                 <Button Name="BackToMenuFromUploadsButton" Content="Back" Click="BackToMenuButton_Click" />
-            </WrapPanel>
+            </StackPanel>
         </WrapPanel>
     </ScrollViewer>
 </Window>
