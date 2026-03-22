@@ -1,9 +1,9 @@
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using KekUploadServerApi.Uploads;
 
 namespace KekUploadServerGUI;
 
 public class MainWindowViewModel
 {
-    public List<IUploadedItem> Uploads { get; set; } = new();
+    public ObservableCollection<IUploadedItem> Uploads { get; set; } = new();
 }

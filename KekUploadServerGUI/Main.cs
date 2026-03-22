@@ -77,7 +77,11 @@ public class Main : IPlugin
             var task = Server.GetUploads();
             task.Wait();
             // update window
-            Dispatcher.UIThread.InvokeAsync(() => { DataContext.Uploads.AddRange(task.Result); });
+            Dispatcher.UIThread.InvokeAsync(() =>
+            {
+                foreach (var upload in task.Result)
+                    DataContext.Uploads.Add(upload);
+            });
         }).Start();
     }
 }

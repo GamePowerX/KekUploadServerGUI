@@ -4,7 +4,7 @@
 Clone the repository and build the plugin with Visual Studio or the dotnet CLI.
 ### 2. Add the plugin to your KekUploadServer
 Add the plugin to your KekUploadServer by putting the plugin dll into the `plugins` folder.
-You also need to add all the assemblies that the plugin depends on to `plugins` folder, they can all be found in the build output of the plugin. (/bin/Debug/net7.0/ or /bin/Release/net7.0/) <br>
+You also need to add all the assemblies that the plugin depends on to `plugins` folder, they can all be found in the build output of the plugin. (/bin/Debug/net10.0/ or /bin/Release/net10.0/) <br>
 For KekUploadServerGUI, you need to add the following assemblies:
 - `KekUploadServerGUI.dll`
 - `Avalonia.Base.dll`
